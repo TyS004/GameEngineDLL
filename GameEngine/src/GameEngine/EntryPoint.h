@@ -11,17 +11,21 @@ int main(int argc, char** argv)
 	//GE_CORE_WARN("Initalized Log!");
 	//GE_INFO("Hello!");
 
+	GameEngine::Log* Core = new GameEngine::Log("GameEngine");
+
+
 	// Using my own Logging
-	GE_CORE_ERROR("Error Message!");
-	GE_CORE_WARN("Warning Message!");
-	GE_CORE_INFO("Info Message");
-	GE_CORE_TRACE("Trace Message");
-	GE_CORE_FATAL("Fatal Message");
+	Core->error("Error Message!");
+	Core->warn("Warning Message!");
+	Core->info("Info Message");
+	Core->trace("Trace Message");
+	Core->fatal("Fatal Message");
 	
 
 	GameEngine::Application* app = GameEngine::CreateApplication();
 	app->Run();
 	delete app;
 }
+
 
 #endif

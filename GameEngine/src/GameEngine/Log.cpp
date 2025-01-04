@@ -10,10 +10,13 @@ namespace GameEngine {
 	//std::shared_ptr<spdlog::logger> Log::s_ClientLogger;
 
 	// Setting Color Values for Console
-	int Log::BLUE = 1;
-	int Log::GREEN = 2;
-	int Log::RED = 4;
-	int Log::YELLOW = 6;
+	const int Log::BLUE = 1;
+	const int Log::GREEN = 2;
+	const int Log::RED = 4;
+	const int Log::YELLOW = 6;
+
+	//Setting Output Console Handle
+	HANDLE Log::stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	//void Log::Init()
 	//{
@@ -25,43 +28,48 @@ namespace GameEngine {
 		//s_ClientLogger->set_level(spdlog::level::trace);
 	//}
 
+	Log::Log()
+	{
+		Log::name = "";
+	}
+	
+	Log::Log(const char* name)
+	{
+		Log::name = name;
+	}
+
+	Log::~Log()
+	{
+		delete this;
+	}
+
 	void Log::error(const char* args)
 	{
-		HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-
 		SetConsoleTextAttribute(stdHandle, RED);
-		std::cout << args << std::endl;
+		std::cout << name << " " << args << std::endl;
 	}
 
 	void Log::warn(const char* args)
 	{
-		HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-
 		SetConsoleTextAttribute(stdHandle, YELLOW);
-		std::cout << args << std::endl;
+		std::cout << name << " " << args << std::endl;
 	}
 
 	void Log::fatal(const char* args)
 	{
-		HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-
 		SetConsoleTextAttribute(stdHandle, RED);
-		std::cout << args << std::endl;
+		std::cout << name << " " << args << std::endl;
 	}
 
 	void Log::info(const char* args)
 	{
-		HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-
 		SetConsoleTextAttribute(stdHandle, BLUE);
-		std::cout << args << std::endl;
+		std::cout << name << " " << args << std::endl;
 	}
 
 	void Log::trace(const char* args)
 	{
-		HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-
 		SetConsoleTextAttribute(stdHandle, GREEN);
-		std::cout << args << std::endl;
+		std::cout << name << " " << args << std::endl;
 	}
 }
